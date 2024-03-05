@@ -5,6 +5,10 @@ import Form from "./Form";
 const user = userEvent.setup();
 
 describe("Form", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("初期状態ではテキストは空欄", () => {
     render(<Form></Form>);
     const input = screen.getAllByPlaceholderText("Enter text");
@@ -22,6 +26,5 @@ describe("Form", () => {
     const button = screen.getByRole("button");
     await user.click(button);
     expect(alertSpy).toHaveBeenCalledWith("submitted: Test Text");
-    alertSpy.mockReset();
   });
 });
